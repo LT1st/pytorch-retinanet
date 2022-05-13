@@ -25,7 +25,9 @@ def main(args=None):
 
     parser.add_argument('--dataset', help='Dataset type, must be one of csv or coco.')
     parser.add_argument('--coco_path', help='Path to COCO directory')
+    # 自己的数据集 csv 
     parser.add_argument('--csv_train', help='Path to file containing training annotations (see readme)')
+    # 自定义类别
     parser.add_argument('--csv_classes', help='Path to file containing class list (see readme)')
     parser.add_argument('--csv_val', help='Path to file containing validation annotations (optional, see readme)')
 
@@ -43,7 +45,7 @@ def main(args=None):
         dataset_train = CocoDataset(parser.coco_path, set_name='train2017',
                                     transform=transforms.Compose([Normalizer(), Augmenter(), Resizer()]))
         dataset_val = CocoDataset(parser.coco_path, set_name='val2017',
-                                  transform=transforms.Compose([Normalizer(), Resizer()]))
+                                  transform=transforms.Compose([Normalizer(), Resizer()]))#验证Augmenter加了没意义
 
     elif parser.dataset == 'csv':
 
